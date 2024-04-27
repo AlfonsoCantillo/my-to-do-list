@@ -42,6 +42,7 @@ header .logo, .tittle{
   align-items: center;
   display: flex;
   justify-content: flex-start;
+  margin-bottom: 40px;
 }
 
 .input{
@@ -72,4 +73,9 @@ header .logo, .tittle{
 
 .button-add:hover{
   background: #2794F5;
+}
+
+.tabla-Tareas {
+  margin: 10px;
+  width: 100%;
 }

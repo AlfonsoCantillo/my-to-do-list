@@ -1,8 +1,9 @@
-import Tasks from "./public/tasks"; 
+import Tareas from "./public/tasks"; 
+import Tasks1 from "./private/task"; 
 import "../css/style.css";
 const App = () => {
   return <>
-    <Tasks/>
+    <Tareas/>
   </>;
 }
 
