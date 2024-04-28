@@ -30,6 +30,11 @@ header .logo, .tittle{
   line-height: 98px;
   text-align: center;
 }
+
+.wheather{
+  margin-left: auto;
+}
+
 .container{
   width: 60%;
 }
