@@ -1,35 +1,24 @@
 import { useState } from "react";
 import logo from "../../../assets/img/logo.png";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  Table,
-  Button,
-  Container,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  FormGroup,
-  ModalFooter,
-} from "reactstrap";
+import { MdDelete } from "react-icons/md";
 
 const Tareas = () =>{
-  /*for(let i=0; i<localStorage.length; i++) {
-    let key = localStorage.key(i);
-    alert(`${key}: ${localStorage.getItem(key)}`);
-  }*/
   const [tarea,setTarea] = useState("");
-  const [table,setTable] = useState(convertirObjetoArray(localStorage));
-
+  const [table,setTable] = useState(leerInformacion(localStorage));
   
   const adicionarTarea = () =>{    
     if (tarea == ""){  
       alert("El campo agregar tarea es requerido por el sistema.");
-      convertirObjetoArray(localStorage);
+      leerInformacion(localStorage);
     }else{      
-      let idTarea = localStorage.length + 1;
-      localStorage.setItem(idTarea,JSON.stringify({"id": idTarea,"contenido": tarea}));
-      setTable(convertirObjetoArray(localStorage));
-      setTarea("");
+      let opcion = window.confirm("¿Estás Seguro que deseas Adicionar la tarea descrita?");
+      if (opcion == true) { 
+        let idTarea = localStorage.length + 1;
+        localStorage.setItem(idTarea,JSON.stringify({"id": idTarea,"contenido": tarea}));
+        setTable(leerInformacion(localStorage));
+        setTarea("");
+      }
     }
   }
 
@@ -37,11 +26,11 @@ const Tareas = () =>{
     let opcion = window.confirm("¿Estás Seguro que deseas Eliminar la tarea seleccionada?");
     if (opcion == true) { 
       localStorage.removeItem(idTarea);
-      setTable(convertirObjetoArray(localStorage));
+      setTable(leerInformacion(localStorage));
     }
   }
 
-  function convertirObjetoArray(objeto){    
+  function leerInformacion(objeto){    
     let array = [];
     for(let i=0; i<objeto.length; i++) {
       let key = objeto.key(i);      
@@ -65,21 +54,24 @@ const Tareas = () =>{
             placeholder="Agregar tarea"
             value={tarea}
           />
-          <button className="button-add" type="button" onClick={adicionarTarea}>Adicionar</button>
+          <button className="btn btn-primary" type="button" onClick={adicionarTarea}>Adicionar</button>
         </form>
-          <table className="table m-10">                       
-            <tbody>
-            {
-              table.map((table) => (
-                <tr key={table.id}>                  
-                  <td>{table.contenido}</td>
-                  <td><Button color="danger" onClick={()=>eliminarTarea(table.id)}>Eliminar</Button></td>
-                </tr>
-              ))
-            }
-            </tbody>
-          </table>
-       
+        <div className="m-2">
+        {
+          table.map((table) => (
+            <div className="row border border-1 bg-light ml-2 mb-3 p-2 rounded-2 text-black-80" key={table.id}>
+              <div className="col-9">
+                {table.contenido}
+              </div>
+              <div className="col-3 text-center"> 
+                <button className="btn btn-danger" onClick={()=>eliminarTarea(table.id)}>
+                  <MdDelete style={{fontSize: '30px'}}/>
+                </button>  
+              </div>   
+            </div>           
+          ))
+        }
+        </div>   
       </section>
     </div>    
   </main>;

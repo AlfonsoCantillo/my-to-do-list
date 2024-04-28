@@ -1,5 +1,4 @@
-import Tareas from "./public/tasks"; 
-import Tasks1 from "./private/task"; 
+import Tareas from "./private/tasks"; 
 import "../css/style.css";
 const App = () => {
   return <>
